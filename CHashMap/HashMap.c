@@ -49,7 +49,7 @@ MapEntry* createMapEntry(string key, generic value)
     return entry;
 }
 
-int equalString(string a, string b)
+bool equalString(string a, string b)
 {
     return strncmp(a, b, strlen(a)) == 0;
 }
@@ -84,17 +84,15 @@ int insertIntoBucket(HashMap* map, MapEntry* entry, int bucket)
             if (equalString(currentEntry->key, entry->key))
             {
                 currentEntry->value = entry->value;
-                return true;
+                return (count - 1);
             }
             
             if (currentEntry->next == NULL)
             {
                 break;
             }
-            else
-            {
-                currentEntry = currentEntry->next;
-            }
+            
+            currentEntry = currentEntry->next;
         }
         
         currentEntry->next = entry;
