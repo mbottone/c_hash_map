@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		D3B4FB8B1C64355000AD9C72 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = D3B4FB8A1C64355000AD9C72 /* main.c */; };
+		D3B4FB931C64490400AD9C72 /* HashMap.c in Sources */ = {isa = PBXBuildFile; fileRef = D3B4FB911C64490400AD9C72 /* HashMap.c */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -25,6 +26,8 @@
 /* Begin PBXFileReference section */
 		D3B4FB871C64355000AD9C72 /* CHashMap */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = CHashMap; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3B4FB8A1C64355000AD9C72 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
+		D3B4FB911C64490400AD9C72 /* HashMap.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = HashMap.c; sourceTree = "<group>"; };
+		D3B4FB921C64490400AD9C72 /* HashMap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HashMap.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +61,8 @@
 			isa = PBXGroup;
 			children = (
 				D3B4FB8A1C64355000AD9C72 /* main.c */,
+				D3B4FB921C64490400AD9C72 /* HashMap.h */,
+				D3B4FB911C64490400AD9C72 /* HashMap.c */,
 			);
 			path = CHashMap;
 			sourceTree = "<group>";
@@ -118,6 +123,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D3B4FB931C64490400AD9C72 /* HashMap.c in Sources */,
 				D3B4FB8B1C64355000AD9C72 /* main.c in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
