@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D3828A861C766FA8003D58BB /* Helpers.c in Sources */ = {isa = PBXBuildFile; fileRef = D3828A841C766FA8003D58BB /* Helpers.c */; };
 		D3B4FB8B1C64355000AD9C72 /* main.c in Sources */ = {isa = PBXBuildFile; fileRef = D3B4FB8A1C64355000AD9C72 /* main.c */; };
 		D3B4FB931C64490400AD9C72 /* HashMap.c in Sources */ = {isa = PBXBuildFile; fileRef = D3B4FB911C64490400AD9C72 /* HashMap.c */; };
 /* End PBXBuildFile section */
@@ -24,6 +25,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		D3828A841C766FA8003D58BB /* Helpers.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = Helpers.c; sourceTree = "<group>"; };
+		D3828A851C766FA8003D58BB /* Helpers.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Helpers.h; sourceTree = "<group>"; };
 		D3B4FB871C64355000AD9C72 /* CHashMap */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = CHashMap; sourceTree = BUILT_PRODUCTS_DIR; };
 		D3B4FB8A1C64355000AD9C72 /* main.c */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.c; path = main.c; sourceTree = "<group>"; };
 		D3B4FB911C64490400AD9C72 /* HashMap.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; path = HashMap.c; sourceTree = "<group>"; };
@@ -63,6 +66,8 @@
 				D3B4FB8A1C64355000AD9C72 /* main.c */,
 				D3B4FB921C64490400AD9C72 /* HashMap.h */,
 				D3B4FB911C64490400AD9C72 /* HashMap.c */,
+				D3828A851C766FA8003D58BB /* Helpers.h */,
+				D3828A841C766FA8003D58BB /* Helpers.c */,
 			);
 			path = CHashMap;
 			sourceTree = "<group>";
@@ -123,6 +128,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D3828A861C766FA8003D58BB /* Helpers.c in Sources */,
 				D3B4FB931C64490400AD9C72 /* HashMap.c in Sources */,
 				D3B4FB8B1C64355000AD9C72 /* main.c in Sources */,
 			);
@@ -243,6 +249,7 @@
 				D3B4FB901C64355000AD9C72 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

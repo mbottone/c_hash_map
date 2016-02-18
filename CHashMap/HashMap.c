@@ -8,23 +8,20 @@
 
 #include "HashMap.h"
 
-HashMap* createHashMap()
-{
-    HashMap* map = new(1, HashMap);
-    
-    map->bucketSize = BUCKET_SIZE;
-    map->numOfBuckets = MIN_BUCKETS;
-    
-    map->table = newNull(map->numOfBuckets, MapEntry*);
-    map->localDepths = newNull(map->numOfBuckets, int);
-    
-    for (int i = 0; i < map->numOfBuckets; i++)
-    {
-        map->localDepths[i] = map->numOfBuckets;
-    }
-    
-    return map;
-}
+#pragma mark - Private Method Definitions
+
+#pragma mark Data Functions
+ulong computeHash(string);
+MapEntry* createMapEntry(string, generic);
+
+#pragma mark Map Mutating Functions
+void expandMap(HashMap*);
+int insertIntoBucket(HashMap*, MapEntry*, int);
+void splitBucket(HashMap*, int);
+
+#pragma mark - Private Method Implementations
+
+#pragma mark Data Functions
 
 ulong computeHash(string key)
 {
@@ -49,10 +46,7 @@ MapEntry* createMapEntry(string key, generic value)
     return entry;
 }
 
-bool equalString(string a, string b)
-{
-    return strncmp(a, b, strlen(a)) == 0;
-}
+#pragma mark Map Mutating Functions
 
 void expandMap(HashMap* map)
 {
@@ -70,33 +64,33 @@ void expandMap(HashMap* map)
 int insertIntoBucket(HashMap* map, MapEntry* entry, int bucket)
 {
     MapEntry* currentEntry = map->table[bucket];
-    int count = 1;
     
     if (currentEntry == NULL)
     {
         map->table[bucket] = entry;
+        return 1;
     }
-    else
+    
+    int count = 1;
+    while (currentEntry != NULL)
     {
-        while (currentEntry != NULL)
+        count++;
+        
+        if (equalString(currentEntry->key, entry->key))
         {
-            count++;
-            if (equalString(currentEntry->key, entry->key))
-            {
-                currentEntry->value = entry->value;
-                return (count - 1);
-            }
-            
-            if (currentEntry->next == NULL)
-            {
-                break;
-            }
-            
-            currentEntry = currentEntry->next;
+            currentEntry->value = entry->value;
+            return (count - 1);
         }
         
-        currentEntry->next = entry;
+        if (currentEntry->next == NULL)
+        {
+            break;
+        }
+        
+        currentEntry = currentEntry->next;
     }
+    
+    currentEntry->next = entry;
     
     return count;
 }
@@ -105,24 +99,24 @@ void splitBucket(HashMap* map, int bucket)
 {
     MapEntry *bucketEntry = map->table[bucket];
     int localDepth = map->localDepths[bucket];
-    int newDepth = localDepth * 2;
+    int newDepth = localDepth << 1;
     
     for (int i = bucket; i < map->numOfBuckets; i += localDepth)
     {
         map->table[i] = NULL;
     }
     
-    MapEntry* nextStorage = NULL;
+    MapEntry* nextEntry = NULL;
     while (bucketEntry != NULL)
     {
-        nextStorage = bucketEntry->next;
+        nextEntry = bucketEntry->next;
         bucketEntry->next = NULL;
         
         int newBucket = computeHash(bucketEntry->key) % newDepth;
         map->localDepths[newBucket] = newDepth;
         insertIntoBucket(map, bucketEntry, newBucket);
         
-        bucketEntry = nextStorage;
+        bucketEntry = nextEntry;
     }
     
     for (int i = (bucket + newDepth); i < map->numOfBuckets; i += newDepth)
@@ -132,12 +126,30 @@ void splitBucket(HashMap* map, int bucket)
     }
 }
 
+#pragma mark - Public Method Implementations
+
+HashMap* createHashMap()
+{
+    HashMap* map = new(1, HashMap);
+    
+    map->bucketSize = BUCKET_SIZE;
+    map->numOfBuckets = MIN_BUCKETS;
+    
+    map->table = newNull(map->numOfBuckets, MapEntry*);
+    map->localDepths = newNull(map->numOfBuckets, int);
+    
+    for (int i = 0; i < map->numOfBuckets; i++)
+    {
+        map->localDepths[i] = map->numOfBuckets;
+    }
+    
+    return map;
+}
+
 void setHashValue(HashMap* map, string key, generic value)
 {
     int bucket = computeHash(key) % map->numOfBuckets;
-    
     MapEntry *insertEntry = createMapEntry(key, value);
-    
     int count = insertIntoBucket(map, insertEntry, bucket);
     
     if (count > map->bucketSize)
@@ -146,7 +158,6 @@ void setHashValue(HashMap* map, string key, generic value)
         {
             expandMap(map);
         }
-        
         splitBucket(map, bucket);
     }
 }
@@ -154,7 +165,6 @@ void setHashValue(HashMap* map, string key, generic value)
 generic getHashValue(HashMap* map, string key)
 {
     int bucket = computeHash(key) % map->numOfBuckets;
-    
     MapEntry *entry = map->table[bucket];
     
     while (entry != NULL && equalString(entry->key, key) == false)

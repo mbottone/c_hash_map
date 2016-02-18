@@ -14,25 +14,14 @@
 #include <string.h>
 #include <math.h>
 
-// Constants
+#include "Helpers.h"
+
+#pragma mark - Constants
 
 #define BUCKET_SIZE 4
 #define MIN_BUCKETS 2
 
-// Macros
-
-#define new(size, type) ({malloc(size * sizeof(type));})
-#define newNull(size, type) ({calloc(size, sizeof(type));})
-#define newSize(pointer, size, type) ({realloc(pointer, size * sizeof(type));})
-
-// Custom Types
-
-typedef char* string;
-typedef void* generic;
-typedef unsigned long ulong;
-typedef enum { false, true } bool;
-
-// Custom Data Structures
+#pragma mark - Public Data Structures
 
 typedef struct MapEntry
 {
@@ -50,7 +39,7 @@ typedef struct HashMap
     int numOfBuckets;
 } HashMap;
 
-// Public Method Signatures
+#pragma mark - Public Method Definitions
 
 HashMap* createHashMap();
 void setHashValue(HashMap*, string, generic);
