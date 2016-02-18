@@ -6,6 +6,9 @@
 //  Copyright © 2016 Michael Bottone. All rights reserved.
 //
 
+#include <stdlib.h>
+#include <stdio.h>
+
 #include "HashMap.h"
 
 int main()

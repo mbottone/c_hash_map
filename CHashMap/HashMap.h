@@ -9,11 +9,6 @@
 #ifndef HashMap_h
 #define HashMap_h
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <math.h>
-
 #include "Helpers.h"
 
 #pragma mark - Constants

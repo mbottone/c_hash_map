@@ -9,7 +9,6 @@
 #ifndef Helpers_h
 #define Helpers_h
 
-#include <stdio.h>
 #include <string.h>
 
 #pragma mark - Macros
